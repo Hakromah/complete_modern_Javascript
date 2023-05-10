@@ -1,0 +1,55 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: #eee;
+}
+
+form {
+	max-width: 200px;
+	margin: 40px auto;
+	background: white;
+	padding: 10px;
+}
+
+input {
+	display: block;
+	margin: 10px auto;
+	padding: 4px;
+}
+
+.success {
+	border: 2px solid limegreen;
+}
+
+.green {
+	color: green;
+}
+.error {
+	border: 2px solid crimson;
+}
+
+.red {
+	color: red;
+}
+
+input[type='submit'] {
+	cursor: pointer;
+}
+
+.main_field {
+	background: #e5d5d5;
+	max-width: 500px;
+	margin: 40px auto;
+	padding: 10px;
+}
+
+.feadback {
+	margin: 6px auto;
+	background: white;
+	width: 100%;
+	padding: 10px;
+}
