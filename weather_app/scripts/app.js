@@ -4,6 +4,9 @@ const details = document.querySelector('.details');
 const time = document.querySelector('img.time');
 const icon = document.querySelector('.icon img');
 
+//create a new instance of our Forcast calass Obj from the forecast file
+const forecast = new Forecast();
+
 const updateUI = (data) => {
 	//destructure properties
 	const { cityDetails, weather } = data;
@@ -23,13 +26,7 @@ const updateUI = (data) => {
 	const iconSrc = `img/icons/${weather.WeatherIcon}.svg`;
 	icon.setAttribute('src', iconSrc);
 
-	let timeSrc = null;
-	{
-		weather.IsDayTime
-			? (timeSrc = './img/day.svg')
-			: (timeSrc = './img/night.svg');
-	}
-
+	let timeSrc = weather.IsDayTime ? './img/day.svg' : './img/night.svg';
 	time.setAttribute('src', timeSrc);
 
 	//remove the d-none class name on present
@@ -41,29 +38,23 @@ const updateUI = (data) => {
 cityForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 
-	const updateCity = async (city) => {
-		const cityDetails = await getCity(city);
-		const weather = await getweather(cityDetails.Key);
-
-		return { cityDetails, weather };
-	};
-
-	window.scrollTo(0, 0);
-	//update the Ui with a new city
+	//get city value
 	const city = cityForm.city.value.trim();
 	cityForm.reset();
 
-	updateCity(city)
+	//update the Ui with a new city
+	forecast
+		.updateCity(city)
 		.then((data) => updateUI(data))
 		.catch((err) => console.log(err));
 
 	//set localStorage
 	localStorage.setItem('city', city);
-	localStorage.getItem('city');
-
-	if (localStorage.getItem('city')) {
-		updateCity(localStorage.getItem('city'))
-			.then((data) => updateUI(data))
-			.catch((err) => console.log(err));
-	}
 });
+
+if (localStorage.getItem('city')) {
+	forecast
+		.updateCity(localStorage.getItem('city'))
+		.then((data) => updateUI(data))
+		.catch((err) => console.log(err));
+}
