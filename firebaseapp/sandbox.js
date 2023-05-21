@@ -14,7 +14,7 @@ const addRecipe = (recipe, id) => {
 	list.innerHTML += html;
 };
 
-//remove from the browser on delete
+//remove from the browser on delete instantly
 const removeRecipe = (id) => {
 	const recipes = document.querySelectorAll('li');
 	recipes.forEach((recipe) => {
@@ -70,7 +70,7 @@ list.addEventListener('click', (e) => {
 	}
 });
 
-//unsubscribe from listening
+//unsubscribe from listening changes
 button.addEventListener('click', () => {
 	unsub();
 	console.log('unsubscribed from collection changes');
